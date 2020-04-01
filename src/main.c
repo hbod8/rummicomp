@@ -2,12 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <malloc.h>
 
 #include "models/headers.h"
 
 bool ANSI_COLOR = true;
 
-char* getColorCode(int c) {
+/*Get Color Code
+ * Returns a ANSI character of the color given its color value.
+ */
+char* getColorCode(char c) {
     switch (c) {
         case 0: return "\033[47m\033[30m";
         case 1: return "\033[47m\033[34m";
@@ -17,7 +21,10 @@ char* getColorCode(int c) {
     }
 }
 
-char* getColor(int c) {
+/*Get Color
+ * Returns a string representation of the color given its color value.
+ */
+char* getColor(char c) {
     switch (c) {
         case 0: return "black";
         case 1: return "blue";
@@ -27,17 +34,23 @@ char* getColor(int c) {
     }
 }
 
+/*Print Run
+ * Recursvley prints every Tile in a Run.
+ */
 void printRun(struct run *r) {
     if (r != NULL) {
         if (ANSI_COLOR) {
-            printf("%s%d%s", getColorCode(r->tile->color), r->tile->value, "\033[0m");
+            printf("%s%d%s ", getColorCode(r->tile->color), r->tile->value, "\033[0m");
         } else {
-            printf("[%s %d]", getColor(r->tile->color), r->tile->value);
+            printf("[%s %d] ", getColor(r->tile->color), r->tile->value);
         }
         printRun(r->next);
     }
 }
 
+/*Print Board
+ * Recursivley prints every Tile in every Run in a Board.
+ */
 void printBoard(struct board *b) {
     if (b != NULL) {
         printRun(b->run);
@@ -48,7 +61,11 @@ void printBoard(struct board *b) {
     return;
 }
 
+/*Test
+ * Function for testing.
+ */
 void test() {
+    //Contruct and display a board of predetermined order and tiles using manual construction of runs:
     printf("Contructing and displaying a board of predetermined order and tiles using manual construction of runs:\n");
 
     struct tile b6 = {1, 6}; //blue 6
@@ -74,6 +91,7 @@ void test() {
 
     printBoard(&b10);
 
+    //Contruct and display a board of predetermined order and tiles using functions to add tiles to runs and runs to boards:
     printf("Contructing and displaying a board of predetermined order and tiles using functions to add tiles to runs and runs to boards:\n");
 
     struct run *run1 = createRun(createTile(1, 6));
@@ -89,14 +107,34 @@ void test() {
     addRunToBoard(board1, run2);
 
     printBoard(board1);
-
-    printf("Free memory space:\n");
-
+    //Call delete board and check that memory chunks are freed.
+    printf("Free memory space: ");
+    struct mallinfo info = mallinfo();
+    int bytesUsedBefore = info.uordblks;
+    deleteBoard(board1);
+    info = mallinfo();
+    int bytesUsedAfter = info.uordblks;
+    printf("Freed %d bytes of memory.\n", bytesUsedBefore - bytesUsedAfter);
+    //Create and display every tile:
     printf("Create and display every tile:\n");
-
-
+    // malloc_stats();
+    struct board *fullBoard = createBoard(NULL);
+    for (int j = 0; j < 8; j++) {
+        struct run *curRun = createRun(createTile((j / 2), 1));
+        for (int i = 2; i <= 13; i++) {
+            addTileToRun(curRun, createTile((j / 2), i));
+        }
+        addRunToBoard(fullBoard, curRun);
+    }
+    printBoard(fullBoard);
+    // malloc_stats();
+    deleteBoard(fullBoard);
+    // malloc_stats();
 }
 
+/*Main
+ * Main entry point for program.
+ */
 int main() {
     printf("\033[0;31mRummicomp\033[0m\n");
     test();
