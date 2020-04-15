@@ -111,6 +111,8 @@ void test() {
     addRunToBoard(board1, run2);
 
     printBoard(board1);
+
+    printf("Run1 length: %d, Run2 length: %d\n", length(run1), length (run2));
     //Call delete board and check that memory chunks are freed.
     printf("Free memory space: ");
     struct mallinfo info = mallinfo();
