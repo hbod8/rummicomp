@@ -1,3 +1,7 @@
+/*
+ * Harry Saliba 2020
+ */
+
 /*Tile
  * Structure that defines a rummikub tile.
  * Color represents one of the four colors where 0=black, 1=blue, 2=red, 3=orange.

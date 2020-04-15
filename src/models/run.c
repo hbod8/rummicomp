@@ -1,3 +1,7 @@
+/*
+ * Harry Saliba 2020
+ */
+
 /*Run
  * Structure that defines a linked list of rummikub tiles.
  * tile represents a pointer to the first tile in the Run.

@@ -1,3 +1,7 @@
+/*
+ * Harry Saliba 2020
+ */
+
 /*Set
  * Structure that defines a linked list of rummikub tiles.
  * tile represents a pointer to the first tile in the Set.

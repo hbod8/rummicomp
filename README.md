@@ -6,3 +6,6 @@ gcc src/main.c -o src/main.o
 
 ## Run
 ./src/main.o
+
+## Authors:
+Harry Saliba @hbod8
