@@ -15,4 +15,5 @@ struct tile *createTile(char c, char v) {
     struct tile *t = malloc(sizeof(struct tile));
     t->color = c;
     t->value = v;
+    return t;
 }
