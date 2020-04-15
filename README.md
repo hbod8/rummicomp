@@ -9,3 +9,4 @@ gcc src/main.c -o src/main.o
 
 ## Authors:
 Harry Saliba @hbod8
+Peter Saliba @psaliba

@@ -1,5 +1,6 @@
 /*
  * Harry Saliba 2020
+ * Peter Saliba 2020
  */
 
 /*Run
@@ -50,5 +51,27 @@ void deleteRun(struct run *r) {
         free(r);
     } else {
         free(r);
+    }
+}
+
+/* Return amount of Tiles in a Run
+ * gets the number of Tiles in the current Run
+ * returns 0 if there are no tiles in the Run
+ */
+int length(struct run *self) {
+    int count = 0;
+    
+    // takes care of called on empty run
+    if (self->tile == NULL) {
+        return count;
+    }
+    // if next is empty, return count +1
+    else if (self->next == NULL) {
+        return count++;
+    }
+    // there is a next, recurse
+    else {
+        count++;
+        return length(self->next);
     }
 }
