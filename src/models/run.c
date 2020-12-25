@@ -54,24 +54,39 @@ void deleteRun(struct run *r) {
     }
 }
 
-/* Return amount of Tiles in a Run
- * gets the number of Tiles in the current Run
- * returns 0 if there are no tiles in the Run
- */
-int length(struct run *self) {
-    int count = 0;
-    
-    // takes care of called on empty run
-    if (self->tile == NULL) {
-        return count;
-    }
+
+/* 
+Returns the amount of tiles in the run (recursion)
+*/
+int lengthHelper(int count, struct run *self) {
     // if next is empty, return count +1
-    else if (self->next == NULL) {
-        return count++;
+    if (self->next == NULL) {
+        count++;
+        return count;
     }
     // there is a next, recurse
     else {
         count++;
-        return length(self->next);
+        return lengthHelper(count, self->next);
     }
+   
 }
+
+
+/* Return amount of Tiles in a Run
+ * gets the number of Tiles in the current Run
+ * returns 0 if there are no tiles in the Run
+ */
+
+int length(struct run *self) {
+     // takes care when called on empty run
+    if (self->tile == NULL) {
+        return 0;
+    }
+    else {
+        int count = 0;
+        return lengthHelper(count, self);
+    }
+  
+}
+

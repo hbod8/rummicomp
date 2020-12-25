@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <malloc.h>
+//#include <malloc.h>
 
 #include "models/headers.h"
 
@@ -115,12 +115,13 @@ void test() {
     printf("Run1 length: %d, Run2 length: %d\n", length(run1), length (run2));
     //Call delete board and check that memory chunks are freed.
     printf("Free memory space: ");
-    struct mallinfo info = mallinfo();
-    int bytesUsedBefore = info.uordblks;
-    deleteBoard(board1);
-    info = mallinfo();
-    int bytesUsedAfter = info.uordblks;
-    printf("Freed %d bytes of memory.\n", bytesUsedBefore - bytesUsedAfter);
+//
+//    struct mallinfo info = malloc_info(0, ;
+//    int bytesUsedBefore = info.uordblks;
+//    deleteBoard(board1);
+//    info = mallinfo();
+//    int bytesUsedAfter = info.uordblks;
+//    printf("Freed %d bytes of memory.\n", bytesUsedBefore - bytesUsedAfter);
     //Create and display every tile:
     printf("Create and display every tile:\n");
     // malloc_stats();

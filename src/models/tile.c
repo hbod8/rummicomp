@@ -7,6 +7,8 @@
  * Color represents one of the four colors where 0=black, 1=blue, 2=red, 3=orange.
  * Value represents the number on the tile 1-13.
  */
+
+//#include <stdlib.h>
 struct tile {
     char color;
     char value;
