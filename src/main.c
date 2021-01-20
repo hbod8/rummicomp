@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <malloc.h>
 
-#include "models/headers.h"
+#include "models/models.h"
 
 bool ANSI_COLOR = true;
 
